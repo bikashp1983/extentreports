@@ -1,7 +1,8 @@
 package com.relevantcodes.extentreports.markup;
 
 import java.net.InetAddress;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import com.relevantcodes.extentreports.support.*;
 
 class Content implements IContent {
@@ -37,7 +38,7 @@ class Content implements IContent {
 		try {
 			markup = markup.replace(temp, ip.replace(".*", InetAddress.getLocalHost().getHostAddress()));
 		}
-		catch (Exception e) {
+			catch (Exception e) {
 			markup = markup.replace(temp, ip.replace(".*", "NOT_AVAILABLE"));
 		}
 		

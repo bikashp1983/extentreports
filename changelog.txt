@@ -64,3 +64,13 @@ ExtentReports 1.0 <02-24-2015>
 	Added ability to use custom css styles along with custom stylesheets
 	Added ability to use custom scripts
 	* It is not required to call endTest() after each test now
+	
+ExtentReports 1.1 <>
+	Added LogStatus -> SKIP [Madhu's request]
+	All Configuration() subclasses are now fluent
+	Added EXEC INFO tab for summary
+	Added tooltip for most controls showing what they do
+	Added tooltip at test level, will show NAME, PASSED, FAILED by hovering the circle
+	Removed static image logo, replaced with text
+	Several styling improvements
+	

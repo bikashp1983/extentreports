@@ -8,7 +8,8 @@
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,600' rel='stylesheet' type='text/css' />
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="http://cdn.rawgit.com/noelboss/featherlight/1.0.4/release/featherlight.min.css" type="text/css" rel="stylesheet" />
-		<style type='text/css'>
+		<link href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/basic/jquery.qtip.min.css" type="text/css" rel="stylesheet" />
+		<style type='text/css'>		
 			html {
 				overflow-y: scroll;}
 			body {
@@ -29,21 +30,6 @@
 			a:hover {
 				color: #59a3df;
 			}
-			.view, .resize {
-			    border: 1px solid #38a5dd;
-			    color: #777;
-			    cursor: pointer;
-			    float: right;
-			    font-size: 11px;
-			    font-weight: 600;
-			    margin-left: 2px;
-			    margin-top: 8px;
-			    padding: 4px 8px 6px;
-			}
-			.view-enabled {
-			    background-color: #38a5dd;
-			    color: white;
-			}
 			#container {
 				width: 1020px;
 			}
@@ -52,7 +38,34 @@
 				margin-right: auto;
 			}
 			#header {
-				margin: 45px 0;
+				margin: 45px 0 70px;
+			}
+			#title a {
+				color: #000;
+				font-size: 18px;
+				letter-spacing: 2px;
+				padding-left: 2px;
+			}
+			.dot {
+				font-weight: 600;
+			}
+			.view, .resize {
+			    border: 1px solid #38a5dd;
+			    border-radius: 100%;
+			    color: #777;
+			    cursor: pointer;
+			    float: right;
+			    font-size: 11px;
+			    font-weight: 600;
+			    margin-top: -4px;
+			    padding: 4px 8px 6px;
+			}
+			.view {
+				display: none;
+			}
+			.view-enabled {
+			    background-color: #38a5dd;
+			    color: white;
 			}
 			#header h3 {
 				border-bottom: 2px solid #59a3df;
@@ -69,6 +82,9 @@
 			#test-filters {
 				font-weight: 300;
 				margin-top: 100px;
+			}
+			.filter1 {
+				display: none !important;
 			}
 			#summary {
 				padding-top: 60px;
@@ -111,6 +127,10 @@
 				background-color: #fff;
 				border-color: #aaa;
 			}
+			.test i {
+				color: #9a9a9a;
+				font-size: 12px;
+			}
 			.dashboard .toggle-area {
 				margin-top: 0;
 			}
@@ -148,6 +168,31 @@
 			#ts-status-dashboard, #step-status-dashboard {
 				display: inline-block;
 				margin-bottom: -40px;
+			}
+			.summary-items {
+			    margin: 0 auto 20px;
+			    width: 88%;
+			}
+			.summary-item {
+			    border: 1px solid #e5e5e5;
+			    display: inline-block;
+			    margin: 12px 5px 0;
+			    padding: 25px 0;
+			    text-align: center;
+			    width: 195px;
+			}.summary-item span {
+			    color: #555;
+			    display: block;
+			}
+			.item-value {
+			    font-size: 18px;
+			    font-weight: 600;
+			}
+			.item-name {
+			    color: #222 !important;
+			    font-size: 12px;
+			    font-weight: 300;
+			    text-transform: uppercase;
 			}
 			.name {
 				color: #3a4249 !important;
@@ -223,7 +268,7 @@
 			.exec-info .simple-gray td:nth-child(3) {
 			    min-width: 140px;
 			}
-			#tabs-2 .simple-gray td:nth-child(2) {
+			#tabs-3 .simple-gray td:nth-child(2) {
 				width: 100px;
 			}
 			.status {
@@ -231,22 +276,22 @@
 				font-weight: 700;
 				text-align: center;
 			}
-			.status.fail, .status.fatal {
+			.status.fail, .status.fatal, .status.fail i, .status.fatal i {
 				color: red;
 			}
-			.status.error {
+			.status.error, .status.error i {
 				color: tomato;
 			}
-			.status.warning {
+			.status.warning, .status.warning i {
 				color: orange;
 			}
-			.status.pass {
+			.status.pass, .status.pass i {
 				color: green;
 			}
-			.status.info {
+			.status.info, .status.info i {
 				color: blue;
 			}
-			.status.skip {
+			.status.skip, .status.skip i {
 				color: #777;
 			}
 			#footer {
@@ -289,7 +334,7 @@
 			}
 			.cs-btn {
 				border: 1px solid;
-				border-radius: 0.2em;
+				border-radius: 50px;
 				cursor: pointer;
 				display: inline;
 				font-size: 11px;
@@ -297,7 +342,7 @@
 				text-transform: uppercase;
 				text-decoration: none;
 				line-height: 13.4667px;
-				padding: 6px 15px;
+				padding: 6px 18px;
 				text-align: center;
 				transition: all 0.2s ease-in-out 0s;
 				vertical-align: middle;
@@ -337,6 +382,11 @@
 				background-color: #e67672;
 				color: white;
 			}
+			.qtip-content {
+			    font-size: 11px;
+			    line-height: 20px;
+			    padding: 5px 10px;
+			}
 		</style>
 		<!--%%CUSTOMCSS%%-->
 	</head>
@@ -344,8 +394,8 @@
 		<div id='container'>
 			<div id='header'>
 				<div id='title'>
-					<a href='http://relevantcodes.com/extentreports-for-selenium/'><img src='http://relevantcodes.com/ExtentReports/logo/extent10.png' /></a>
-					<span class="resize expand"><i class='fa fa-expand'></i></span>	
+					<a href='http://relevantcodes.com/extentreports-for-selenium/'>extent<span class='dot'>.</span></a>
+					<span class="resize expand" title='Resize view'><i class='fa fa-expand'></i></span>	
 					<span class="view"><i class='fa fa-cog'></i></span>
 				</div>
 				<div id='header-summary'>
@@ -371,12 +421,13 @@
 				<div id='dashboard-container'>
 					<div class='dashboard'>
 						<div class='toggle-area'>
-							<span class='toggle-span'><i class='fa fa-bar-chart-o'></i></span>
+							<span title='Toggle graph or system info' class='toggle-span'><i class='fa fa-bar-chart-o'></i></span>
 						</div>
 						<div id='tabs'>
 							<ul>
 								<li><a href="#tabs-1" class='tabs-1 name'>Summary</a></li>
-								<li><a href="#tabs-2" class='tabs-2 name'>System Info</a></li>
+								<li><a href="#tabs-2" class='tabs-2 name'>Exec Info</a></li>
+								<li><a href="#tabs-3" class='tabs-3 name'>System Info</a></li>
 							</ul>
 							<div id='tabs-1'>
 								<div class='graphs'>
@@ -385,6 +436,42 @@
 								</div>
 							</div>
 							<div id='tabs-2'>
+								<div class='summary-items'>
+									<div class='summary-item'>
+										<span class='item-value'>02/26 9:14AM</span>
+										<span class='item-name'>Started At</span>
+									</div>
+									<div class='summary-item'>
+										<span class='item-value'>5</span>
+										<span class='item-name'>Total Tests</span>
+									</div>
+									<div class='summary-item'>
+										<span class='item-value'>4</span>
+										<span class='item-name'>Tests Passed</span>
+									</div>
+									<div class='summary-item'>
+										<span class='item-value'>1</span>
+										<span class='item-name'>Tests Failed</span>
+									</div>
+									<div class='summary-item'>
+										<span class='item-value'>02/26 12:22PM</span>
+										<span class='item-name'>Ended At</span>
+									</div>
+									<div class='summary-item'>
+										<span class='item-value'>107</span>
+										<span class='item-name'>Total Steps</span>
+									</div>
+									<div class='summary-item'>
+										<span class='item-value'>102</span>
+										<span class='item-name'>Steps Passed</span>
+									</div>
+									<div class='summary-item'>
+										<span class='item-value'>5</span>
+										<span class='item-name'>Steps Failed</span>
+									</div>
+								</div>
+							</div>
+							<div id='tabs-3'>
 								<table class='simple-gray'>
 									<thead>
 										<tr>
@@ -440,6 +527,7 @@
 	<script type='text/javascript' src='http://code.jquery.com/jquery-1.10.1.min.js'></script>
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script src="http://cdn.rawgit.com/noelboss/featherlight/1.0.4/release/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.1/basic/jquery.qtip.min.js" type="text/javascript" charset="utf-8"></script>
 	<!--%%CUSTOMSCRIPT%%-->
 	<script type='text/javascript'>
 		$(document).ready(function() {
@@ -459,7 +547,7 @@
 				else
 					status = 'pass';
 				lastTest.html( lastTest.html().replace(new RegExp('<!--%%TESTSTATUS%%\-\->', 'g'), status) );
-			} 
+			}
 			$('.resize').click(function() {
 				var target = $(this);
 				if (target.hasClass('expand')) {
@@ -477,14 +565,14 @@
 			$('.view').click(function() {
 				var target = $(this);
 				if (!target.hasClass('view-enabled')) {
-					$('#test-filters').css('margin-top', '50px').slideUp('fast', function() {
-						$('#test-filters').detach().prependTo('#tests').slideDown('fast');
+					$('#test-filters').css('margin', '50px 0 20px').slideUp(0, function() {
+						$('#test-filters').detach().prependTo('#tests').slideDown(0);
 					});
 					$('.filter1').hide();
 				}
 				else {
-					$('#test-filters').css('margin-top', '100px').slideUp('fast', function() {
-						$('#test-filters').detach().appendTo('#header').slideDown('fast');
+					$('#test-filters').css('margin-top', '100px').slideUp(0, function() {
+						$('#test-filters').detach().appendTo('#header').slideDown(0);
 					});
 					$('.filter1').show();
 				}
@@ -492,29 +580,28 @@
 			});
 			$('.test').click(function(evt) {
 				var target = $(this);
-				var i = target.find('.toggle-area').find('i');
-				if (i.hasClass('fa-minus')) {
+				if (target.find('.exec-info').is(':visible')) {
 					if (evt.target.nodeName == "DIV" || evt.target.nodeName == "I" || evt.target.nodeName == "SPAN") {
-						i.removeClass('fa-minus').addClass('fa-plus');
 						target.toggleClass('test-expanded').children('.exec-info').slideUp(300);
 					}
 				}
 				else {
-					i.removeClass('fa-plus').addClass('fa-minus'); 
 					target.toggleClass('test-expanded').children('.exec-info').slideDown(300);
 				}
 			});
 			$('#tabs').click(function(evt) {
 				var target = $(this); 
 				var t = evt.target.className;
-				evt.preventDefault();
-				if (target.find('#' + t.split(' ')[0]).is(':visible')) {
-					target.find('#' + t.split(' ')[0]).slideUp(400);
-					$('.' + t.split(' ')[0]).css('background-color', '');
-				}
-				else {
-					target.find('#' + t.split(' ')[0]).slideDown(400);
-					$('.' + t.split(' ')[0]).css('background-color', '#ddd');
+				if (t.substring(0, 4) == 'tabs') {
+					evt.preventDefault();
+					if (target.find('#' + t.split(' ')[0]).is(':visible')) {
+						target.find('#' + t.split(' ')[0]).slideUp(400);
+						$('.' + t.split(' ')[0]).css('background-color', '');
+					}
+					else {
+						target.find('#' + t.split(' ')[0]).slideDown(400);
+						$('.' + t.split(' ')[0]).css('background-color', '#ddd');
+					}
 				}
 			});
 			$('.btn-toggle').click(function() {
@@ -548,10 +635,31 @@
 				i.removeClass('fa-minus').addClass('fa-plus');
 			});
 			$('.toggle-span .fa-bar-chart-o').click(function() {
-				$('.tabs-1, .tabs-2').click();
+				$('.tabs-1, .tabs-2, .tabs-3').click();
 			});
+			$('.fa-circle-thin').each(function() {
+			    $(this).qtip({
+			        content: {
+			            text: '<div><span style="font-weight: 600;">' + $(this).closest('.test').find('.name').text() + '</span>' 
+								+ '<br />STEPS: ' + $(this).closest('.test').find('.status i').length
+								+ '<br />PASSED: ' + $(this).closest('.test').find('.status.pass i').length
+								+ '<br />FAILED: ' + $(this).closest('.test').find('.status.fail i').length
+							+ '</div>'
+			        },
+			        position: {
+			        	adjust: {
+				            x: 20
+				        },
+				        my: 'left center',
+				        at: 'top center',
+				        target: $(this)
+				    }
+			    });
+			});
+			$('[title!=""]').qtip({ position: { my: 'bottom center', at: 'top center'} });
 			$('.exec-info').toggle();
 			$('#tabs > div').toggle();
+			$('.view').click();
 		})
 	</script>
 	<script type='text/javascript'>

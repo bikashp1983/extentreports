@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import com.relevantcodes.extentreports.markup.*;
 import com.relevantcodes.extentreports.support.*;
@@ -54,9 +55,11 @@ class Logger extends AbstractLog {
 				.replace(MarkupFlag.get("step"), Resources.getText(packagePath + "step.txt") + MarkupFlag.get("step"))
 				.replace(MarkupFlag.get("timestamp"), new SimpleDateFormat("HH:mm:ss").format(Calendar.getInstance().getTime()))
 				.replace(MarkupFlag.get("stepstatus"), logStatus.toString().toLowerCase())
+				.replace(MarkupFlag.get("stepstatusu"), logStatus.toString().toUpperCase())
 				.replace(MarkupFlag.get("statusicon"), statusIcon)
 				.replace(MarkupFlag.get("stepname"), stepName)
-				.replace(MarkupFlag.get("details"), details);
+				.replace(MarkupFlag.get("details"), details)
+				.replace(MarkupFlag.get("timeended") + MarkupFlag.get("timeended"), MarkupFlag.get("timeended") + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("timeended"));
 		
 		FileWriterEx.write(filePath, markup);
 	}
