@@ -6,8 +6,9 @@ import com.relevantcodes.extentreports.support.*;
 
 class Content implements IContent {
 	private String filePath;
+	private Configuration instance;
 	
-	public void renewSystemInfo() {
+	public Configuration renewSystemInfo() {
 		String markup = FileReaderEx.readAllText(filePath);
 		String userName = MarkupFlag.get("userName") + ".*" + MarkupFlag.get("userName");
 		String hostName = MarkupFlag.get("hostName") + ".*" + MarkupFlag.get("hostName");
@@ -59,9 +60,12 @@ class Content implements IContent {
 		markup = markup.replace(temp, availMem.replace(".*", "" + Runtime.getRuntime().freeMemory() / mb + "MB"));
 		
 		FileWriterEx.write(filePath, markup);
+		
+		return instance;
 	}
 	
-	public Content(String filePath) {
+	public Content(String filePath, Configuration instance) {
 		this.filePath = filePath;
+		this.instance = instance;
 	}
 }

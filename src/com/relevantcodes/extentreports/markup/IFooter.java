@@ -1,7 +1,7 @@
 package com.relevantcodes.extentreports.markup;
 
 public interface IFooter {
-	void useExtentFooter(Boolean use);
+	Configuration useExtentFooter(Boolean use);
 	
 	/**
 	 * @deprecated

@@ -4,8 +4,9 @@ import com.relevantcodes.extentreports.support.*;
 
 class Header implements IHeader {
 	private String filePath;
+	private Configuration instance;
 	
-	public void introSummary(String newSummary) {
+	public Configuration introSummary(String newSummary) {
 		String markup = FileReaderEx.readAllText(filePath);
 		String pattern = MarkupFlag.get("reportsummary") + ".*" + MarkupFlag.get("reportsummary");
 		newSummary = pattern.replace(".*", newSummary); 
@@ -13,10 +14,13 @@ class Header implements IHeader {
 		String oldSummary = RegexMatcher.getNthMatch(markup, pattern, 0);
 		markup = markup.replace(oldSummary, newSummary);
 		
-		FileWriterEx.write(filePath, markup);		
+		FileWriterEx.write(filePath, markup);
+		
+		return instance;
 	}
 	
-	public Header(String filePath) {
+	public Header(String filePath, Configuration instance) {
 		this.filePath = filePath;
+		this.instance = instance;
 	} 
 }
