@@ -34,6 +34,11 @@ abstract class AbstractLog {
 	protected Long timeDiff;
 	protected String timeUnit;
 	protected Integer testCounter = 0;
+	protected Integer testsPassed = 0;
+	protected Integer testsFailed = 0;
+	protected Integer stepCounter = 0;
+	protected Integer stepsPassed = 0;
+	protected Integer stepsFailed = 0;
 	
 	private LogLevel level = LogLevel.ALLOW_ALL;
 	private LogStatus lastRunStatus = LogStatus.PASS;
@@ -41,6 +46,8 @@ abstract class AbstractLog {
 	public void log(LogStatus logStatus, String stepName, String details, String screenCapturePath)
 	{	
 		if (testName == "") return;
+		
+		stepCounter++;
 		
 		this.logStatus = logStatus;
 		this.stepName = stepName;
@@ -148,7 +155,7 @@ abstract class AbstractLog {
 			default: break;
 		}
 		
-		if (logStatus == LogStatus.INFO)
+		if (logStatus == LogStatus.INFO || logStatus == LogStatus.SKIP)
 			lastRunStatus = LogStatus.PASS;
 		else
 			lastRunStatus = logStatus;

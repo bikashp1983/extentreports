@@ -3,6 +3,7 @@ package com.relevantcodes.extentreports.markup;
 import java.net.InetAddress;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import com.relevantcodes.extentreports.support.*;
 
 class Content implements IContent {
@@ -11,6 +12,7 @@ class Content implements IContent {
 	
 	public Configuration renewSystemInfo() {
 		String markup = FileReaderEx.readAllText(filePath);
+		String startedAt = MarkupFlag.get("starttime") + ".*" + MarkupFlag.get("starttime");
 		String userName = MarkupFlag.get("userName") + ".*" + MarkupFlag.get("userName");
 		String hostName = MarkupFlag.get("hostName") + ".*" + MarkupFlag.get("hostName");
 		String ip = MarkupFlag.get("ip") + ".*" + MarkupFlag.get("ip");
@@ -22,6 +24,9 @@ class Content implements IContent {
 		String availMem = MarkupFlag.get("availMem") + ".*" + MarkupFlag.get("availMem");
 		String temp = "";
 		int mb = 1024 * 2014;
+		
+		temp = RegexMatcher.getNthMatch(markup, startedAt, 0);
+		markup = markup.replace(temp, startedAt.replace(".*", new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString()));
 		
 		temp = RegexMatcher.getNthMatch(markup, userName, 0);
 		markup = markup.replace(temp, userName.replace(".*", System.getProperty("user.name")));

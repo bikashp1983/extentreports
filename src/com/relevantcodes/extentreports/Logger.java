@@ -59,7 +59,7 @@ class Logger extends AbstractLog {
 				.replace(MarkupFlag.get("statusicon"), statusIcon)
 				.replace(MarkupFlag.get("stepname"), stepName)
 				.replace(MarkupFlag.get("details"), details)
-				.replace(MarkupFlag.get("timeended") + MarkupFlag.get("timeended"), MarkupFlag.get("timeended") + new SimpleDateFormat("yyyy/MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("timeended"));
+				.replace(MarkupFlag.get("timeended") + MarkupFlag.get("timeended"), MarkupFlag.get("timeended") + new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("timeended"));
 		
 		FileWriterEx.write(filePath, markup);
 	}

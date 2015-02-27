@@ -152,13 +152,9 @@
 			#tabs > div {
 				margin-top: 25px;
 			}
-			.fa-bar-chart-o {
+			.fa-area-chart {
 				color: #aaa;
-				font-size: 14pt;
-			}
-			.fa-bar-chart-o:hover {
-				color: #43b4f9;
-				font-size: 14pt;
+				font-size: 12pt;
 			}
 			.graphs {
 				margin-left: auto;
@@ -171,7 +167,7 @@
 			}
 			.summary-items {
 			    margin: 0 auto 20px;
-			    width: 88%;
+			    width: 855px;
 			}
 			.summary-item {
 			    border: 1px solid #e5e5e5;
@@ -200,6 +196,10 @@
 				font-weight: 600;
 				text-transform: uppercase;
 				width: 100%;
+			}
+			.tabs-expanded {
+				background-color: #43b4f9;
+				color: #fff !important;
 			}
 			.test-name {
 				margin: -20px -20px 0;
@@ -421,7 +421,7 @@
 				<div id='dashboard-container'>
 					<div class='dashboard'>
 						<div class='toggle-area'>
-							<span title='Toggle graph or system info' class='toggle-span'><i class='fa fa-bar-chart-o'></i></span>
+							<span title='Toggle graph or system info' class='toggle-span'><i class='fa fa-area-chart'></i></span>
 						</div>
 						<div id='tabs'>
 							<ul>
@@ -438,35 +438,35 @@
 							<div id='tabs-2'>
 								<div class='summary-items'>
 									<div class='summary-item'>
-										<span class='item-value'>02/26 9:14AM</span>
+										<span class='item-value'><!--%%STARTTIME%%--><!--%%STARTTIME%%--></span>
 										<span class='item-name'>Started At</span>
 									</div>
 									<div class='summary-item'>
-										<span class='item-value'>5</span>
+										<span class='item-value total-tests'></span>
 										<span class='item-name'>Total Tests</span>
 									</div>
 									<div class='summary-item'>
-										<span class='item-value'>4</span>
+										<span class='item-value tests-passed'></span>
 										<span class='item-name'>Tests Passed</span>
 									</div>
 									<div class='summary-item'>
-										<span class='item-value'>1</span>
+										<span class='item-value tests-failed'></span>
 										<span class='item-name'>Tests Failed</span>
 									</div>
 									<div class='summary-item'>
-										<span class='item-value'>02/26 12:22PM</span>
+										<span class='item-value'><!--%%TIMEENDED%%--><!--%%TIMEENDED%%--></span>
 										<span class='item-name'>Ended At</span>
 									</div>
 									<div class='summary-item'>
-										<span class='item-value'>107</span>
+										<span class='item-value total-steps'></span>
 										<span class='item-name'>Total Steps</span>
 									</div>
 									<div class='summary-item'>
-										<span class='item-value'>102</span>
+										<span class='item-value steps-passed'></span>
 										<span class='item-name'>Steps Passed</span>
 									</div>
 									<div class='summary-item'>
-										<span class='item-value'>5</span>
+										<span class='item-value steps-failed'></span>
 										<span class='item-name'>Steps Failed</span>
 									</div>
 								</div>
@@ -596,11 +596,11 @@
 					evt.preventDefault();
 					if (target.find('#' + t.split(' ')[0]).is(':visible')) {
 						target.find('#' + t.split(' ')[0]).slideUp(400);
-						$('.' + t.split(' ')[0]).css('background-color', '');
+						$('.' + t.split(' ')[0]).css('background-color', '').removeClass('tabs-expanded');
 					}
 					else {
 						target.find('#' + t.split(' ')[0]).slideDown(400);
-						$('.' + t.split(' ')[0]).css('background-color', '#ddd');
+						$('.' + t.split(' ')[0]).addClass('tabs-expanded');
 					}
 				}
 			});
@@ -634,7 +634,7 @@
 				var i = test.find('.toggle-area').find('i');
 				i.removeClass('fa-minus').addClass('fa-plus');
 			});
-			$('.toggle-span .fa-bar-chart-o').click(function() {
+			$('.toggle-span .fa-area-chart').click(function() {
 				$('.tabs-1, .tabs-2, .tabs-3').click();
 			});
 			$('.fa-circle-thin').each(function() {
@@ -656,6 +656,12 @@
 				    }
 			    });
 			});
+			$('.total-tests').text( $('.test').length );
+			$('.tests-passed').text( $('.teststatus .pass').length );
+			$('.tests-failed').text( $('.teststatus .fail').length + $('.teststatus .fatal').length );
+			$('.total-steps').text( $('tbody .status').length );
+			$('.steps-passed').text( $('td.status.pass').length );
+			$('.steps-failed').text( $('td.status.fail').length + $('td.status.fatal').length );
 			$('[title!=""]').qtip({ position: { my: 'bottom center', at: 'top center'} });
 			$('.exec-info').toggle();
 			$('#tabs > div').toggle();
