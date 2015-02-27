@@ -140,14 +140,15 @@
 			}
 			#tabs ul {
 				font-weight: 300;
-				margin: 0 0 0 -50px;
+				margin: 0 0 0 -46px;
 			}
 			#tabs ul li {
 				display: inline;
 				white-space: nowrap;
 			}
 			#tabs ul li a {
-				padding: 5px 10px;
+				border-left: 2px solid transparent;
+				padding: 0 10px 0 6px;
 			}
 			#tabs > div {
 				margin-top: 25px;
@@ -181,8 +182,9 @@
 			    display: block;
 			}
 			.item-value {
+				color: #383947 !important;
+    			font-weight: normal;
 			    font-size: 18px;
-			    font-weight: 600;
 			}
 			.item-name {
 			    color: #222 !important;
@@ -191,15 +193,14 @@
 			    text-transform: uppercase;
 			}
 			.name {
-				color: #3a4249 !important;
-				font-size: 11.5px;
-				font-weight: 600;
+				color: #242533 !important;
+			    font-size: 12px;
+			    font-weight: normal;
 				text-transform: uppercase;
 				width: 100%;
 			}
 			.tabs-expanded {
-				background-color: #43b4f9;
-				color: #fff !important;
+				border-left: 2px solid dodgerblue !important;
 			}
 			.test-name {
 				margin: -20px -20px 0;
@@ -246,6 +247,7 @@
 			.simple-gray thead td {
 				background: #f5f6f8;
 			    border-bottom: 1px solid #ddd;
+			    color: #242533;
 			    font-size: 8pt;
 			    font-weight: 600;
 			    padding: 12px 10px;
@@ -286,7 +288,7 @@
 				color: orange;
 			}
 			.status.pass, .status.pass i {
-				color: green;
+				color: #32CD32;
 			}
 			.status.info, .status.info i {
 				color: blue;
@@ -338,7 +340,7 @@
 				cursor: pointer;
 				display: inline;
 				font-size: 11px;
-				font-weight: 700;
+				font-weight: normal;
 				text-transform: uppercase;
 				text-decoration: none;
 				line-height: 13.4667px;
@@ -425,9 +427,9 @@
 						</div>
 						<div id='tabs'>
 							<ul>
-								<li><a href="#tabs-1" class='tabs-1 name'>Summary</a></li>
-								<li><a href="#tabs-2" class='tabs-2 name'>Exec Info</a></li>
-								<li><a href="#tabs-3" class='tabs-3 name'>System Info</a></li>
+								<li><a href="#tabs-1" class='tabs-1 name'>Dashboard</a></li>
+								<li><a href="#tabs-2" class='tabs-2 name'>Execution Info</a></li>
+								<li><a href="#tabs-3" class='tabs-3 name'>System Details</a></li>
 							</ul>
 							<div id='tabs-1'>
 								<div class='graphs'>
@@ -460,6 +462,7 @@
 									<div class='summary-item'>
 										<span class='item-value total-steps'></span>
 										<span class='item-name'>Total Steps</span>
+
 									</div>
 									<div class='summary-item'>
 										<span class='item-value steps-passed'></span>

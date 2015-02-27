@@ -43,7 +43,7 @@ class Logger extends AbstractLog {
 		if (screenCapturePath != "") {
 			String img = MarkupFlag.img(screenCapturePath);
 			
-			if (screenCapturePath.indexOf("http") == 0) {
+			if (screenCapturePath.indexOf("http") == 0 || screenCapturePath.indexOf(".") == 0) {
 				img = img.replace("file:///", "");
 			}
 			
