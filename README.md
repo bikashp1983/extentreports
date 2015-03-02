@@ -1,6 +1,6 @@
 # ExtentReports Library
 
-ExtentReports is a HTML reporting library for Selenium WebDriver for Java and creates easy to use, attractive reports. It shows test and step summary, test steps and status in a toggle view for quick analysis.
+ExtentReports is a HTML reporting library for Selenium WebDriver for Java which is extremely easy to use and creates beautiful execution reports. It shows test and step summary, test steps and status in a toggle view for quick analysis.
 
 View ExtentReports sample <a href='http://relevantcodes.com/ExtentReports/Extent.html'>here</a>.
 
@@ -9,6 +9,43 @@ For most complete and up to date documentation, visit <a href='http://relevantco
 ### Download
 
 Download the jar and view latest details & comments from <a href='http://relevantcodes.com/extentreports-for-selenium/'>this</a> link.
+
+### What’s new in version 1.1
+
+The following have been added to the the latest version:
+
+The following have been added to the the latest version:
+<ol>
+<li>configuration() is now Deprecated, use config() instead
+<pre>
+// existing 1.0 and earlier
+extent.configuration().documentHead().addCustomStyles(css);
+extent.configuration().footer().useExtentFooter(false);
+extent.configuration().header().introSummary("This is my new summary");;
+
+// release 1.1
+extent.config()
+    .addCustomStyles(css)
+    .useExtentFooter(false)
+    .introSummary("This is my new summary");
+</pre>
+<li>Added a new dashboard for Execution info that shows [Sujata]:
+<ul>
+<li>Suite started at time</li>
+<li>Suite end time</li>
+<li>Total tests</li>
+<li>Total tests passed</li>
+<li>Total tests failed</li>
+<li>Total steps</li>
+<li>Total steps passed</li>
+<li>Total steps failed</li>
+</ul>
+</li>
+<li>Added test execution timestamp/duration and also for the entire suite [Roman]</li>
+<li>Added ability to use relative paths for snapshots [Bas, Madhu]</li>
+<li>Added a new LogStatus -> SKIP [Madhu]</li>
+<li>Added tooltips for controls to denote their function</li>
+</ol>
 
 ### Basic Usage
 
@@ -123,10 +160,10 @@ You have options to use custom CSS directly (version 1.0+) in the document or br
 ```java
 // custom styles
 String style = "p{font-size:20px;} .test{background-color:#000 !important;color:#fff !important;}";
-extent.configuration().documentHead().addCustomStyles(style);
+extent.config().addCustomStyles(style);
 
 // custom stylesheet
-extent.configuration().documentHead().addCustomStylesheet("C:\\css.css");
+extent.config().addCustomStylesheet("C:\\css.css");
 ```
 
 #### Using custom JS
@@ -134,7 +171,7 @@ extent.configuration().documentHead().addCustomStylesheet("C:\\css.css");
 Just like having the ability to change document styles, you can also add your own custom scripts (version 1.0+).
 
 ```java
-extent.configuration().scripts().insertJS("$('.test').click(function(){ alert('test clicked'); });");
+extent.config.insertJS("$('.test').click(function(){ alert('test clicked'); });");
 ```
 
 #### Add/Remove Extent footer
@@ -143,10 +180,10 @@ Its possible to add/remove the Extent footer using the following configuration:
 
 ```java
 // remove the footer
-extent.configuration().footer().useExtentFooter(false);
+extent.config.useExtentFooter(false);
 
 // use the footer
-extent.configuration().footer().useExtentFooter(true);
+extent.config.useExtentFooter(true);
 ```
 
 #### Change status icons
@@ -154,7 +191,7 @@ extent.configuration().footer().useExtentFooter(true);
 Not a lot of people would do this, but you can choose to use your own icons for log status (PASS, FAIL, WARNING etc.) by choosing one of the icons from Fontawesome website: http://fortawesome.github.io/Font-Awesome/icons/.
 
 ```java
-extent.configuration().statusIcon(LogStatus.PASS, "check-circle");
+extent.config().statusIcon(LogStatus.PASS, "check-circle");
 ```
 
 #### Changing the top-level summary
@@ -163,7 +200,7 @@ You can remove or add your own summary by using the following configuration:
 
 ```java
 // this changes the top level summary
-extent.configuration().header().introSummary("My custom report summary.");
+extent.config().introSummary("My custom report summary.");
 ```
 
 ### Examples
@@ -178,7 +215,7 @@ public class TestDriver {
     
     public static void main(String[] args) {
         extent.init("C:\\Extent.html", false);
-        extent.configuration().footer().useExtentFooter(false);
+        extent.config().useExtentFooter(false);
         
         extent.startTest("Test Login");
         new Login().test();
@@ -236,6 +273,25 @@ public class Logout {
 ### Important Version Changes
 
 Below are version specific changes that you will find helpful.
+
+#### Version 1.1
+
+<ul>
+	<li>configuration() is now deprecated, use config() instead</li>
+
+<pre>
+// existing 1.0
+extent.configuration().documentHead().addCustomStyles(css);
+extent.configuration().footer().useExtentFooter(false);
+extent.configuration().header().introSummary("This is my new summary");;
+
+// release 1.1
+extent.config()
+    .addCustomStyles(css)
+    .useExtentFooter(false)
+    .introSummary("This is my new summary");
+</pre>
+</ul>
 
 #### Version 1.0+
 
