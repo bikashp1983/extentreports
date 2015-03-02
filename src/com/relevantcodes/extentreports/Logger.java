@@ -61,15 +61,18 @@ class Logger extends AbstractLog {
 				.replace(MarkupFlag.get("details"), details)
 				.replace(MarkupFlag.get("timeended") + MarkupFlag.get("timeended"), MarkupFlag.get("timeended") + new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("timeended"));
 		
+		markup = markup.replace(RegexMatcher.getNthMatch(markup, MarkupFlag.get("testEndTime") + ".*" + MarkupFlag.get("testEndTime"), 0), MarkupFlag.get("testEndTime") + new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("testEndTime"));
+				
 		FileWriterEx.write(filePath, markup);
 	}
 	
 	@Override
-	protected void startTest() {
+	protected void startTest() {		
 		// this order of creating entries in markup is important
 		String markup = FileReaderEx.readAllText(filePath)
 				.replace(MarkupFlag.get("teststatus"), getLastRunStatus().toString().toLowerCase())
-				.replace(MarkupFlag.get("step"), "").replace("\n", "").replace("\r", "");
+				.replace(MarkupFlag.get("step"), "")
+				.replace(MarkupFlag.get("testEndTime"), "");  //.replace("\n", "").replace("\r", "");
 		
 		if (testDisplayOrder == DisplayOrder.BY_LATEST_TO_OLDEST) {
 			markup = markup.replace(MarkupFlag.get("test"), MarkupFlag.get("test") + Resources.getText(packagePath + "test.txt"));
@@ -78,8 +81,14 @@ class Logger extends AbstractLog {
 			markup = markup.replace(MarkupFlag.get("test"), Resources.getText(packagePath + "test.txt") + MarkupFlag.get("test"));
 		}
 		
+		if (testDescription == "") {
+			markup = markup.replace(MarkupFlag.get("descvis"), "style='display:none;'");
+		}
+		
 		markup = markup.replace(MarkupFlag.get("testname"), testName)
-				.replace(MarkupFlag.get("testdescription"), testDescription);
+				.replace(MarkupFlag.get("testdescription"), testDescription)
+				.replace(MarkupFlag.get("descvis"), "")
+				.replace(MarkupFlag.get("testStartTime"), new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString());
 		
 		FileWriterEx.write(filePath, markup);
 	}
@@ -87,8 +96,9 @@ class Logger extends AbstractLog {
 	@Override
 	protected void endTest() {
 		String markup = FileReaderEx.readAllText(filePath)
-				.replace(MarkupFlag.get("teststatus"), getLastRunStatus().toString().toLowerCase())	
-				.replace(MarkupFlag.get("timeinfo"),  new SimpleDateFormat("HH:mm:ss").format(startTime) + " - " +  new SimpleDateFormat("HH:mm:ss").format(endTime) + " (" + timeDiff + " " + timeUnit + ")");
+				.replace(MarkupFlag.get("teststatus"), getLastRunStatus().toString().toLowerCase())
+				.replace(MarkupFlag.get("step"), "")
+				.replace(MarkupFlag.get("testEndTime"), "");
 		
 		testName = "";
 		

@@ -28,54 +28,47 @@ public class Configuration {
 	private IFooter footer;
 	private IScripts scripts;
 	
-	public Configuration statusIcon(LogStatus status, String newIcon) {
+	public void statusIcon(LogStatus status, String newIcon) {
 		FontAwesomeIco.override(status, newIcon);
-		
-		return this;
 	}
 	
-	public Configuration params(String varName, String varValue) {
+	public void params(String varName, String varValue) {
 		param.put(varName, varValue);
-		return this;
 	}
 	
 	public IContent content() {
 		if (!(content instanceof IContent)) 
-			content = new Content(param.get("filePath"), this);
+			content = new Content(param.get("filePath"));
 		
 		return content;
 	}
 	
 	public IDocumentHead documentHead() {
 		if (!(documentHead instanceof IDocumentHead))
-			documentHead = new DocumentHead(param.get("filePath"), this);
+			documentHead = new DocumentHead(param.get("filePath"));
 		
 		return documentHead;
 	}
 	
 	public IHeader header() {
 		if (!(header instanceof IHeader))
-			header = new Header(param.get("filePath"), this);
+			header = new Header(param.get("filePath"));
 		
 		return header;
 	}
 	
 	public IFooter footer() {
 		if (!(footer instanceof IFooter))
-			footer = new Footer(param.get("filePath"), this);
+			footer = new Footer(param.get("filePath"));
 		
 		return footer;
 	}
 	
 	public IScripts scripts() {
 		if (!(scripts instanceof IScripts))
-			scripts = new Scripts(param.get("filePath"), this);
+			scripts = new Scripts(param.get("filePath"));
 		
 		return scripts;
-	}
-	
-	protected Configuration instance() {
-		return this;
 	}
 	
 	public Configuration() {}

@@ -49,6 +49,11 @@ abstract class AbstractLog {
 		
 		stepCounter++;
 		
+		if (logStatus == LogStatus.PASS)
+			stepsPassed++;
+		else if (logStatus == LogStatus.FAIL || logStatus == LogStatus.FATAL)
+			stepsFailed++;
+		
 		this.logStatus = logStatus;
 		this.stepName = stepName;
 		this.details = details;
@@ -69,11 +74,17 @@ abstract class AbstractLog {
 	protected abstract void log();
 	
 	public void startTest(String name, String description) {
+		if (testCounter != 0)
+			if (getLastRunStatus() == LogStatus.PASS)
+				testsPassed++;
+			else if (getLastRunStatus() == LogStatus.FAIL || getLastRunStatus() == LogStatus.FATAL || getLastRunStatus() == LogStatus.ERROR)
+				testsFailed++;
+		
 		testCounter++;
 		
 		testName = name;
 		testDescription = description;
-		startTime = Calendar.getInstance().getTime();
+		startTime = Calendar.getInstance().getTime();	
 		
 		startTest();
 		
@@ -104,7 +115,7 @@ abstract class AbstractLog {
 		this.level = level;
 	}
 	
-	public LogStatus getLastRunStatus() {
+	public LogStatus getLastRunStatus() {				
 		return lastRunStatus;
 	}
 	
@@ -140,7 +151,11 @@ abstract class AbstractLog {
 	private void trackLastRunStatus() {
 		switch (lastRunStatus) {
 			case FATAL:
-			case FAIL: 
+				return;
+			case FAIL:
+				if (logStatus == LogStatus.FATAL) {
+					lastRunStatus = logStatus;
+				}
 				return;
 			case ERROR: 
 				if (logStatus == LogStatus.FAIL) {

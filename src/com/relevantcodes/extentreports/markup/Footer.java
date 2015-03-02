@@ -2,11 +2,10 @@ package com.relevantcodes.extentreports.markup;
 
 import com.relevantcodes.extentreports.support.*;
 
-class Footer extends Configuration implements IFooter {
+class Footer implements IFooter {
 	private String filePath;
-	private Configuration instance;
 	
-	public Configuration useExtentFooter(Boolean use) {
+	public void useExtentFooter(Boolean use) {
 		String start = MarkupFlag.get("PROJECTFOOTER");
 		String end = MarkupFlag.get("/PROJECTFOOTER");
 		String markup = FileReaderEx.readAllText(filePath);
@@ -19,8 +18,6 @@ class Footer extends Configuration implements IFooter {
 			markup = markup.replace(start, start + "<!--").replace(end, "-->" + end);		
 			FileWriterEx.write(filePath, markup);
 		}
-
-		return instance;
 	}
 	
 	// ToDo
@@ -61,8 +58,7 @@ class Footer extends Configuration implements IFooter {
 		FileWriterEx.write(filePath, markup);
 	}
 	
-	public Footer(String filePath, Configuration instance) {
+	public Footer(String filePath) {
 		this.filePath = filePath;
-		this.instance = instance;
 	}
 }

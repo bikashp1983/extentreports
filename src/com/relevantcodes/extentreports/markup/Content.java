@@ -8,14 +8,12 @@ import com.relevantcodes.extentreports.support.*;
 
 class Content implements IContent {
 	private String filePath;
-	private Configuration instance;
-	
-	public Configuration renewSystemInfo() {
+
+	public void renewSystemInfo() {
 		String markup = FileReaderEx.readAllText(filePath);
 		String startedAt = MarkupFlag.get("starttime") + ".*" + MarkupFlag.get("starttime");
 		String userName = MarkupFlag.get("userName") + ".*" + MarkupFlag.get("userName");
 		String hostName = MarkupFlag.get("hostName") + ".*" + MarkupFlag.get("hostName");
-		String ip = MarkupFlag.get("ip") + ".*" + MarkupFlag.get("ip");
 		String os = MarkupFlag.get("os") + ".*" + MarkupFlag.get("os");
 		String osArch = MarkupFlag.get("osarch") + ".*" + MarkupFlag.get("osarch");
 		String javaVersion = MarkupFlag.get("javaversion") + ".*" + MarkupFlag.get("javaversion");
@@ -39,14 +37,6 @@ class Content implements IContent {
 			markup = markup.replace(temp, hostName.replace(".*", "NOT_AVAILABLE"));
 		}
 		
-		temp = RegexMatcher.getNthMatch(markup, ip, 0);
-		try {
-			markup = markup.replace(temp, ip.replace(".*", InetAddress.getLocalHost().getHostAddress()));
-		}
-			catch (Exception e) {
-			markup = markup.replace(temp, ip.replace(".*", "NOT_AVAILABLE"));
-		}
-		
 		temp = RegexMatcher.getNthMatch(markup, os, 0);
 		markup = markup.replace(temp, os.replace(".*", System.getProperty("os.name")));
 		
@@ -66,12 +56,9 @@ class Content implements IContent {
 		markup = markup.replace(temp, availMem.replace(".*", "" + Runtime.getRuntime().freeMemory() / mb + "MB"));
 		
 		FileWriterEx.write(filePath, markup);
-		
-		return instance;
 	}
 	
-	public Content(String filePath, Configuration instance) {
+	public Content(String filePath) {
 		this.filePath = filePath;
-		this.instance = instance;
 	}
 }
