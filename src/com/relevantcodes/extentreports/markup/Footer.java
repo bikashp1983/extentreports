@@ -12,12 +12,13 @@ class Footer implements IFooter {
 		
 		if (use) {
 			markup = markup.replace(start + "<!--", start).replace("-->" + end, end);
-			FileWriterEx.write(filePath, markup);
 		}
 		else {
-			markup = markup.replace(start, start + "<!--").replace(end, "-->" + end);		
-			FileWriterEx.write(filePath, markup);
+			markup = markup.replace(start, start + "<!--");
+			markup = markup.replace(end, "-->" + end);
 		}
+		
+		FileWriterEx.write(filePath, markup);
 	}
 	
 	// ToDo

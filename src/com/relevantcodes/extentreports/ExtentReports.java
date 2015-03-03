@@ -106,7 +106,7 @@ public class ExtentReports {
 	
 	private void initialProc() {
 		configuration().params("filePath", filePath);
-		config().renewSystemInfo().displayExtentFooter(false);
+		config().renewSystemInfo().useExtentFooter(false);
 	}
 	
 	private String callerClass(StackTraceElement[] element) {

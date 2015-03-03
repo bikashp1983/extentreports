@@ -17,7 +17,7 @@ public class DocumentConfig {
 		return this;
 	}
 	
-	public DocumentConfig displayExtentFooter(Boolean display) {
+	public DocumentConfig useExtentFooter(Boolean display) {
 		if (null == footer)
 			footer = new Footer(filePath);
 		
@@ -35,11 +35,13 @@ public class DocumentConfig {
 		return this;
 	}
 
-	public DocumentConfig introSummary(String newSummary) {
+	public DocumentConfig reportHeadline(String headline) {
 		if (null == header)
 	        header = new Header(filePath);
 		
-		header.introSummary(newSummary);
+		Integer maxLength = 70;
+		
+		header.introSummary(headline.substring(0, maxLength - 1));
 		
 		return this;
 	}
