@@ -29,7 +29,7 @@ extent.config()
     .useExtentFooter(false)
     .introSummary("This is my new summary");
 </pre>
-<li>Added a new dashboard for Execution info that shows [Sujata]:
+<li>Added a new dashboard for Execution info that shows:
 <ul>
 <li>Suite started at time</li>
 <li>Suite end time</li>
@@ -41,9 +41,9 @@ extent.config()
 <li>Total steps failed</li>
 </ul>
 </li>
-<li>Added test execution timestamp/duration and also for the entire suite [Roman]</li>
-<li>Added ability to use relative paths for snapshots [Bas, Madhu]</li>
-<li>Added a new LogStatus -> SKIP [Madhu]</li>
+<li>Added test execution timestamp/duration and also for the entire suite</li>
+<li>Added ability to use relative paths for snapshots</li>
+<li>Added a new LogStatus -> SKIP</li>
 <li>Added tooltips for controls to denote their function</li>
 </ol>
 
