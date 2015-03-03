@@ -58,10 +58,10 @@ class Logger extends AbstractLog {
 				.replace(MarkupFlag.get("stepstatusu"), logStatus.toString().toUpperCase())
 				.replace(MarkupFlag.get("statusicon"), statusIcon)
 				.replace(MarkupFlag.get("stepname"), stepName)
-				.replace(MarkupFlag.get("details"), details)
-				.replace(MarkupFlag.get("timeended") + MarkupFlag.get("timeended"), MarkupFlag.get("timeended") + new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("timeended"));
+				.replace(MarkupFlag.get("details"), details);
 		
-		markup = markup.replace(RegexMatcher.getNthMatch(markup, MarkupFlag.get("testEndTime") + ".*" + MarkupFlag.get("testEndTime"), 0), MarkupFlag.get("testEndTime") + new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("testEndTime"));
+		markup = markup.replace(RegexMatcher.getNthMatch(markup, MarkupFlag.get("testEndTime") + ".*" + MarkupFlag.get("testEndTime"), 0), MarkupFlag.get("testEndTime") + new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("testEndTime"))
+				.replace(RegexMatcher.getNthMatch(markup, MarkupFlag.get("timeEnded") + ".*" + MarkupFlag.get("timeEnded"), 0), MarkupFlag.get("timeEnded") + new SimpleDateFormat("MM/dd HH:mm:ss").format(new Date()).toString() + MarkupFlag.get("timeEnded"));
 				
 		FileWriterEx.write(filePath, markup);
 	}

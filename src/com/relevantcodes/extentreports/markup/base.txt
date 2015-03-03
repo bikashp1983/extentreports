@@ -6,7 +6,7 @@
 	Contributors:  Bas Dijkstra
 --> 
 	<head>
-		<title>Extent Reports v2</title>
+		<title>Extent Reports 1.1</title>
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|Raleway:500' rel='stylesheet' type='text/css' />
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="http://cdn.rawgit.com/noelboss/featherlight/1.0.4/release/featherlight.min.css" type="text/css" rel="stylesheet" />
@@ -155,8 +155,8 @@
 				text-transform: uppercase;
 			}
 			.test-status, .startedAt, .endedAt {
-				font-family: Raleway, 'Open Sans';
-				font-size: 12px;
+				font-family: Verdana, "Lucida Grande", Raleway, 'Open Sans';
+				font-size: 11px;
 				padding: 4px 10px;
 			}
 			.test-status {
@@ -343,7 +343,7 @@
 							<div class='topbar-items-right'>
 								<span class='pointer resize expand' title='Resize view by enlarging/compressing tests area. Use this option if you have long test logs and would like to use broader viewing angles for analysis.'><i class='fa fa-expand'></i></span>	
 								<span class='pointer toggle-type' title='Convert Tests-toggles into accordion so only one test can remain open at a time. Turning this open will enable viewing only one test at a time and will close all others for a clean and organized view. Use this open if you intend to analyse only one test at a time.'><i class='fa fa-toggle-off'></i></span>	
-								<span>Extent v2</span>
+								<span>Extent 1.1</span>
 							</div>
 						</div>
 					</div>
