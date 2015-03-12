@@ -6,8 +6,8 @@
 	Contributors:  Bas Dijkstra
 --> 
 	<head>
-		<title>Extent Reports 1.1</title>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600|Raleway:500' rel='stylesheet' type='text/css' />
+		<title>Extent Reports 1.2</title>
+		<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css' />
 		<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" />
 		<link href="http://cdn.rawgit.com/noelboss/featherlight/1.0.4/release/featherlight.min.css" type="text/css" rel="stylesheet" />
 		<style type='text/css'>
@@ -15,15 +15,15 @@
 				overflow-y: scroll;}
 			body {
 				color: #022b37;
-				font-family: 'Open Sans', Calibri;
+				font-family: 'Source Sans Pro', Calibri;
 				font-size: 14px;
 				margin: 0;
 			}
 			a {
-				color: #507fd6;
+				color: #0054a6;
 				text-decoration: none;
 			}
-			#extent-container {
+			#extent-container, #header, #dashboard, #filters, #content, #footer {
 				width: 100%;
 			}
 			.topbar, .title, .menu, .dashboard, .filters, .content, .footer {
@@ -43,7 +43,7 @@
 			}
 			.topbar-items-right span {
 				border-left: 1px solid #ccc;
-				padding: 0px 10px;
+				padding: 0px 8px;
 				vertical-align: sub;
 			} .topbar-items-right span:first-child {
 				border-left: none;
@@ -55,12 +55,12 @@
 				margin: 25px 0 30px;
 			}
 			.logo {
-				font-family: Raleway;
+				font-family: 'Source Sans Pro', Verdana;
 				font-size: 16px;
 				letter-spacing: 1px;
 			}
 			.menu-items {
-				margin-top: -35px;
+				margin-top: -32px;
 				float: right;
 			}
 			.menu ul li {
@@ -70,14 +70,14 @@
 				padding: 10px 10px 45px;
 			}			
 			.menu span {
-				color: #507fd6;
+				color: #0054a6;
 				cursor: pointer;
-				font-family: raleway;
-				font-size: 12px;
+				font-family: Verdana;
+				font-size: 11px;
 				text-transform: uppercase;
 			}
-			.menu-item-selected {
-				background-color: #f9f9f9;
+			.menu-item-selected span {
+				border-bottom: 1px solid #507fd6;
 			}
 			#dashboard {
 				background-color: #f9f9f9;
@@ -140,26 +140,28 @@
 			}
 			.test {
 				border: 1px solid #b4bfc3;
-				color: #507fd6;
+				color: #0054a6;
 				cursor: pointer;
 				margin: 5px 0;
 				padding: 20px;
 			}
 			.test-expanded {
-				border: 1px solid #6b767a;
-				color: #444;
+				border: 1px solid #434e52;
+				border-top: 2px solid #434e52;
+				height: auto;
+				width: auto;
 			}
 			.name {
-				font-size: 14px;
+				font-family: Verdana;
+				font-size: 15px;
 			}
 			.test-info {
 				float: right;
-				margin-right: 30px;
 				margin-top: -20px;
 				text-transform: uppercase;
 			}
 			.test-status, .startedAt, .endedAt {
-				font-family: Verdana, "Lucida Grande", Raleway, 'Open Sans';
+				font-family: Verdana, "Lucida Grande";
 				font-size: 11px;
 				padding: 4px 10px;
 			}
@@ -169,14 +171,6 @@
 			.startedAt, .endedAt {
 				border: 1px solid #507fd6;
 				color: #121212;
-			}
-			.test-tooltip {
-				float: right;
-				margin-top: -22px;
-			}
-			.test-tooltip i {
-				color: #999;
-				font-size: 12px;
 			}
 			.description {
 				background-color: #f7f7f7;
@@ -189,8 +183,11 @@
 				font-weight: 600;
 				text-transform: uppercase;
 			}
+			.description-content {
+			    font-family: Verdana;
+			    font-size: 13px;
+			}
 			.test-header {
-				/*background-color: #fdfeff;*/
 				margin: -20px;
 				padding: 20px;
 			}
@@ -201,6 +198,8 @@
 			.extent-table {
 				border: 1px solid #ddd;
 				border-collapse: collapse;
+				color: #222;
+				font-family: Arial;
 				width: 100%;
 			}
 			.extent-table tr:hover {
@@ -232,13 +231,18 @@
 			.extent-table td:nth-child(3) {
 				min-width: 160px;
 			}
+			.log-event {
+				font-family: monospace, Consolas;
+				font-size: 13px !important;
+			}
+			.logevent-timestamp {
+				font-weight: bold;
+			}
 			.extent-button {
 				border: 1px solid;
 				cursor: pointer;
 				display: inline;
-				font-family: Raleway, 'Open Sans';
-				font-size: 11px;
-				text-transform: uppercase;
+				font-size: 13px;
 				text-decoration: none;
 				line-height: 13.4667px;
 				padding: 6px 18px;
@@ -282,8 +286,8 @@
 				color: white;
 			}
 			.status {
-				font-family: Raleway;
-				font-size: 12px;
+				font-family: 'Source Sans Pro';
+				font-size: 13px;
 				text-align: center;
 			}
 			.status.fail, .status.fail i {
@@ -329,12 +333,24 @@
 			    border: 4px solid #eee;
 			    display: block;
 			    height: auto;
+			    margin-left: auto;
+			    margin-right: auto;
 			    margin-top: 15px;
 			    text-align: center;
 			    width: 70%;
 			}
 			.pointer {
 				cursor: pointer;
+			}
+			@media all and (max-width: 1380px) {
+				.topbar, .title, .menu, .filters, .content, .footer {
+					width: 1050px;
+				}
+			}
+			@media all and (max-width: 1290px) {
+				.topbar, .title, .menu, .filters, .content, .footer {
+					width: 1020px;
+				}
 			}
 		</style>
 		<!--%%CUSTOMCSS%%-->
@@ -351,7 +367,8 @@
 								<span class='headline'><!--%%REPORTSUMMARY%%-->Insert a quick summary here (max 70 chars).<!--%%REPORTSUMMARY%%--></span>
 								<span class='pointer resize expand' title='Resize view by enlarging/compressing tests area. Use this option if you have long test logs and would like to use broader viewing angles for analysis.'><i class='fa fa-expand'></i></span>	
 								<span class='pointer toggle-type' title='Convert Tests-toggles into accordion so only one test can remain open at a time. Turning this open will enable viewing only one test at a time and will close all others for a clean and organized view. Use this open if you intend to analyse only one test at a time.'><i class='fa fa-toggle-off'></i></span>	
-								<span>Extent 1.1</span>
+								<span class='pointer expand-tests' title='Expand all tests to view their results. Note: this control only expands tests if the accordion-toggle is not enabled.'><i class='fa fa-bars'></i></span>
+								<span class='pointer collapse-tests' title='Collapse all tests.'><i class='fa fa-cube'></i></span>
 							</div>
 						</div>
 					</div>
@@ -459,10 +476,10 @@
 				<div class='filters'>
 					<div class='filters-container'>
 						<div class='by-status'>
-							<div id="filter-pass" class="extent-button extent-button-green status-toggle"><i class="fa fa-check"></i>PASS</div>
-							<div id="filter-fail" class="extent-button extent-button-red status-toggle"><i class="fa fa-times-circle"></i>FAIL</div>
-							<div id="filter-error" class="extent-button extent-button-lightred status-toggle"><i class="fa fa-exclamation-circle"></i>ERROR</div>
-							<div id="filter-warning" class="extent-button extent-button-orange status-toggle"><i class="fa fa-warning"></i>WARNING</div>
+							<div id="filter-pass" class="extent-button extent-button-green status-toggle"><i class="fa fa-check"></i>Pass</div>
+							<div id="filter-fail" class="extent-button extent-button-red status-toggle"><i class="fa fa-times-circle"></i>Fail</div>
+							<div id="filter-error" class="extent-button extent-button-lightred status-toggle"><i class="fa fa-exclamation-circle"></i>Error</div>
+							<div id="filter-warning" class="extent-button extent-button-orange status-toggle"><i class="fa fa-warning"></i>Warning</div>
 						</div>
 					</div>
 				</div>
@@ -512,12 +529,21 @@
 					status = 'pass';
 				lastTest.html( lastTest.html().replace(new RegExp('<!--%%TESTSTATUS%%\-\->', 'g'), status) );
 			}
+			// append values to summary & status
 			$('.total-tests').text( $('.test').length );
 			$('.tests-passed').text( $('.test-status.pass').length );
 			$('.tests-failed').text( $('.test-status.fail').length + $('.test-status.fatal').length + $('.test-status.warning').length + $('.test-status.error').length );
 			$('.total-steps').text( $('tbody .status').length );
 			$('.steps-passed').text( $('td.status.pass').length );
 			$('.steps-failed').text( $('td.status.fail').length + $('td.status.fatal').length );
+			// change table structure for log-event only tables
+			$('.exec-info table').filter(function() { 
+				return $(this).find('.status').length == 0; 
+			}).find('th').hide().parent().append('<th colspan="4">Log Event</th>');
+			// change table structure for logstatut-logevent only tables
+			$('.exec-info table').filter(function() { 
+				return $(this).find('.step-name').length == 0; 
+			}).find('th').hide().parent().append('<th>Timestamp</th><th>Status</th><th colspan="2">Details</th>');
 			$('.menu span').click(function() {
 				var elm = $(this);
 				if (elm.parent().attr('class') != 'menu-item-selected') {
@@ -526,6 +552,13 @@
 					$('#' + elm.attr('class')).fadeIn(400);
 					elm.parent().addClass('menu-item-selected');
 				}
+			});
+			$('.expand-tests').click(function() {
+				if (!$('.toggle-type').hasClass('accordion')) 
+					$('.exec-info').slideDown(200);					
+			});
+			$('.collapse-tests').click(function() {
+				$('.exec-info').slideUp(200);
 			});
 			$('.test-header').click(function() {
 				var elm = $(this).parent();
@@ -594,10 +627,11 @@
 			]);
 			var options = {
 			  backgroundColor: { fill:'transparent' },
+			  chartArea: {'width': '65%', 'height': '65%'},
 			  colors: ['green', 'tomato', 'orange', 'red', '#999'],
 			  fontSize: '11',
 			  height: 275,
-			  pieHole: 0.5,
+			  pieHole: 0.6,
 			  pieSliceText: 'value', 
 			  title: 'TEST SUMMARY', 
 			  width: 450
@@ -618,10 +652,11 @@
 			]);
 			var options = {
 			  backgroundColor: { fill:'transparent' },
+			  chartArea: {'width': '65%', 'height': '65%'},
 			  colors: ['green', 'red', 'darkred', 'tomato', 'orange', 'dodgerblue', '#999'],
 			  fontSize: '11',
 			  height: 275,
-			  pieHole: 0.5,
+			  pieHole: 0.6,
 			  pieSliceText: 'value', 
 			  title: 'STEP SUMMARY', 
 			  width: 450
